@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- META SECTION -->
+        <title>Property Data Visualization</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- END META SECTION -->
+        <link rel="stylesheet" type="text/css" href="css/styles.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="css/nouislider.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="css/customize.css" media="screen" />
+
+        <!-- React -->
+        <script src="https://fb.me/react-0.13.3.min.js"></script>
+        <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+        <style>
+            .pageLink {
+                cursor: pointer;
+                text-decoration: underline;
+                color: blue;
+            }
+
+            table {
+                border-spacing: 0;
+                border-collapse: collapse;
+            }
+
+            td, th {
+                border: 1px solid black;
+                padding: 4px 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="properties"></div>
+        <script src="js/pageapp.js" type="text/jsx">
+        </script>
+        <!-- page container -->
+        <div class="page-container">
+            
+            <!-- page header -->
+            <div class="page-header">
+                
+                <!-- page header holder -->
+                <div class="page-header-holder">
+                    
+                    <!-- page logo -->
+                    <div class="logo">
+                        <a href="\">Property Data Visualization</a>
+                    </div>
+                    <!-- ./page logo -->
+                </div>
+                <!-- ./page header holder -->
+                
+            </div>
+            <!-- ./page header -->
+            
+            <!-- page content -->
+            <div class="page-content">
+                    <div class="page-content-wrap banner">
+                        <div class="page-content-holder padding-v-20">
+                            <div class="text-center col-md-3">
+                                <a id="listingbyregion" class="btn btn-primary btn-xl"><span class="fa fa-eye"></span> Listings</a><br/>
+                                <a id="averageprice" class="btn btn-success btn-xl"><span class="fa fa-shopping-cart"></span> Average Price</a>
+                            </div>
+                            <div class="map col-md-7 col-md-offset-2">
+                                <div style="margin-top: 90px;margin-left: 155px;" class="row"><span class="nby"><a rel="tooltip" title="Average Price North Bay Area" class="avgprice label-danger btn"></a></span></div>
+                                <div style="margin-top: 132px;margin-left: 120px;" class="row"><span class="sfc"><a rel="tooltip" title="Average Price San Fracisco" class="avgprice label-danger btn"></a></span></div>
+                                <div style="margin-top: -24px;margin-left: 265px;" class="row"><span class="eby"><a rel="tooltip" title="Average Price East Bay Area" class="avgprice label-danger btn"></a></span></div>
+                                <div style="margin-top: 26px;margin-left: 115px;" class="row"><span class="pen"><a rel="tooltip" title="Average Price Peninsula" class="avgprice label-danger btn"></a></span></div>
+                                <div style="margin-top: 70px;margin-left: 295px;" class="row"><span class="sby"><a rel="tooltip" title="Average Price South Bay Area" class="avgprice label-danger btn"></a></span></div>
+                                <div style="margin-top: 5px;margin-left: 195px;" class="row"><span class="scz"><a rel="tooltip" title="Average Price Santa Cruz" class="avgprice label-danger btn"></a></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- page content wrapper -->
+                    <div class="page-content-wrap bg-light">
+                        <!-- page content holder -->
+                        <div class="page-content-holder padding-v-20">
+                            <div class="text-center">
+                                <div class="row">
+                                    <h3 class="filters col-md-2">Price Range</h3>
+                                    <a id="min-value" class="btn btn-default btn-sm sliderlabel col-md-1">1000</a>
+                                    <div id="slider" class="col-md-7"></div>
+                                    <a id="max-value" class="btn btn-default btn-sm sliderlabel col-md-1">5000</a>
+                                </div>
+                                <br />
+                               
+                                <div class="region" id="regionButtons">
+                                    <h3 class="filters">Region</h3>
+                                    <button id="all" class="btn btn-primary btn-xl">All</button>
+                                    <button id="sfo" class="btn btn-success btn-xl">San Francisco</button>
+                                    <button id="nby" class="btn btn-success btn-xl">North Bay</button>
+                                    <button id="eby" class="btn btn-success btn-xl">East Bay</button>
+                                    <button id="sby" class="btn btn-success btn-xl">South Bay</button>
+                                    <button id="pen" class="btn btn-success btn-xl">Peninsula</button>
+                                    <button id="scz" class="btn btn-success btn-xl">Santa Cruz</button>
+                                </div>
+                                <br/><br/>
+                                <div class="arrange">
+                                    <h3 class="filters">Arrange</h3>
+                                    <a id="ltoh" class="btn btn-primary btn-xl">Price Low to High</a>
+                                    <a id="htol" class="btn btn-success btn-xl">Price High to Low</a>
+                                    <a id="newfirst" class="btn btn-success btn-xl">Newest First</a>
+                                    <a id="oldfirst" class="btn btn-success btn-xl">Oldest First</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ./page content holder -->
+                    </div>
+                    <!-- ./page content wrapper -->
+                    <!-- page content wrapper -->
+                    <div class="page-content-wrap bg-img-1">
+                        <div class="divider"><div class="box"><span class="fa fa-angle-down"></span></div></div>
+                        <!-- page content holder -->
+                        <div class="page-content-holder" id="propListing">
+                            <div class="row mix-grid thumbnails" id="props1"></div>
+                            <div class="row mix-grid thumbnails" id="props2"></div>
+                            <div class="row mix-grid thumbnails" id="props3"></div>
+                            <ul class="pagination pagination-sm pull-right">
+                                <li class="disabled"><a href="#">&lt;&lt;</a></li>
+                                <li class="disabled"><a href="#">&lt;</a></li>
+                                <li class="active"><a href="#">Page 1 of 7000</a></li>
+                                <li><a href="#">&gt;</a></li>
+                                <li><a href="#">&gt;&gt;</a></li>
+                            </ul>
+                        </div>
+                        <!-- ./page content holder -->
+                    </div>
+                    <!-- ./page content wrapper -->
+                </div>
+            <!-- ./page content -->
+            
+            <!-- page footer -->
+            <div class="page-footer">
+                
+                <!-- page footer wrap -->
+                <div class="page-footer-wrap bg-darken-gray">
+                    <!-- page footer holder -->
+                    <div class="page-footer-holder">
+                        <div class="copyright">
+                            - Shruti Pavagadhi                            
+                        </div>
+                    </div>
+                    <!-- ./page footer holder -->
+                </div>
+                <!-- ./page footer wrap -->
+                
+            </div>
+            <!-- ./page footer -->
+            
+        </div>        
+        <!-- ./page container -->
+        
+        <!-- page scripts -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
+        
+        <script type="text/javascript" src="js/plugins/mixitup/jquery.mixitup.js"></script>
+        
+        <script type="text/javascript" src="js/actions.js"></script>
+
+        <script type="text/javascript" src="js/nouislider.min.js"></script>
+        <script type="text/javascript" src="js/global.js"></script>
+        <!-- ./page scripts -->
+    </body>
+</html>
+
+
+
+
+
+
